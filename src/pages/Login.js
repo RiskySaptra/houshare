@@ -4,25 +4,42 @@ import {
   loginEmailAndPassword,
 } from "../handlers/authHandler";
 
+import { useNavigate, useLocation } from "react-router-dom";
+
 import { useSetRecoilState } from "recoil";
 import { isError } from "../atom";
+import { useEffect } from "react";
 
-const LoginPage = () => {
+const LoginPage = ({ auth }) => {
   const setError = useSetRecoilState(isError);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/dashboard";
 
   const handleLoginWithEmail = async () => {
-    return loginEmailAndPassword().catch((error) => {
-      const errorMessage = error.message;
-      setError({ status: true, message: errorMessage });
-    });
+    return loginEmailAndPassword()
+      .then(() => navigate(from, { replace: true }))
+      .catch((error) => {
+        const errorMessage = error.message;
+        setError({ status: true, message: errorMessage });
+      });
   };
 
   const handleLoginWithGoogle = async () => {
-    return loginWithGoogle().catch((error) => {
-      const errorMessage = error.message;
-      setError({ status: true, message: errorMessage });
-    });
+    return loginWithGoogle()
+      .then(() => navigate(from, { replace: true }))
+      .catch((error) => {
+        const errorMessage = error.message;
+        setError({ status: true, message: errorMessage });
+      });
   };
+
+  useEffect(() => {
+    if (auth && location.pathname === "/login") {
+      return navigate("/dashboard", { replace: true });
+    }
+  }, [auth, location.pathname, navigate]);
+
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <div className="flex flex-col w-full h-full lg:h-fit max-w-md px-4 py-8 bg-white lg:rounded-lg lg:shadow-lg lg:border-[1px] dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 lg:mb-80">

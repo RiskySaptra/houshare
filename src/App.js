@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { Routes, Route, Navigate, Link } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
@@ -43,7 +43,7 @@ const Home = () => {
 };
 
 const App = () => {
-  const setAuthenticated = useSetRecoilState(isAuthenticated);
+  const [authenticated, setAuthenticated] = useRecoilState(isAuthenticated);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -54,7 +54,6 @@ const App = () => {
   return (
     <div>
       <GlobalNotification />
-
       <Routes>
         <Route path="/" element={<Home />} />
         {/* private routes */}
@@ -62,7 +61,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="group" element={<GroupCreationPage />} />
         </Route>
-        <Route path="login" element={<LoginPage />} />
+        <Route path="login" element={<LoginPage auth={authenticated} />} />
         <Route path="/404" element={<NotFound404 />} />
         <Route path="*" element={<Navigate replace to="/404" />} />
       </Routes>

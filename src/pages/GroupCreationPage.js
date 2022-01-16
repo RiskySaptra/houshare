@@ -35,7 +35,7 @@ function GroupCreationPage() {
             </div>
             <div className="flex flex-col mb-6">
               <label
-                for="checked"
+                htmlFor="checked"
                 className="inline-flex items-center cursor-pointer"
               >
                 <span className="relative">
