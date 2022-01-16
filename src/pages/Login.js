@@ -1,6 +1,28 @@
-import { loginWithGoogle, logout } from "../handlers/authHandler";
+import {
+  loginWithGoogle,
+  logout,
+  loginEmailAndPassword,
+} from "../handlers/authHandler";
+
+import { useSetRecoilState } from "recoil";
+import { isError } from "../atom";
 
 const LoginPage = () => {
+  const setError = useSetRecoilState(isError);
+
+  const handleLoginWithEmail = async () => {
+    return loginEmailAndPassword().catch((error) => {
+      const errorMessage = error.message;
+      setError({ status: true, message: errorMessage });
+    });
+  };
+
+  const handleLoginWithGoogle = async () => {
+    return loginWithGoogle().catch((error) => {
+      const errorMessage = error.message;
+      setError({ status: true, message: errorMessage });
+    });
+  };
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <div className="flex flex-col w-full h-full lg:h-fit max-w-md px-4 py-8 bg-white lg:rounded-lg lg:shadow-lg lg:border-[1px] dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10 lg:mb-80">
@@ -11,6 +33,7 @@ const LoginPage = () => {
           <button
             type="button"
             className="py-2 px-4 flex justify-center items-center bg-blue-600 hover:shadow-xl active:bg-blue-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md active:shadow-xl rounded"
+            onClick={() => handleLoginWithEmail()}
           >
             <svg
               width="20"
@@ -27,7 +50,7 @@ const LoginPage = () => {
           <button
             type="button"
             className="py-2 px-4 flex justify-center items-center bg-red-600 hover:shadow-xl active:bg-red-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md active:shadow-xl rounded"
-            onClick={loginWithGoogle}
+            onClick={() => handleLoginWithGoogle()}
           >
             <svg
               width="20"

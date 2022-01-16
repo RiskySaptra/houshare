@@ -5,26 +5,28 @@ import {
 } from "firebase/auth";
 import { auth, provider } from "../firebase/config";
 
-const loginWithGoogle = () => {
-  signInWithPopup(auth, provider)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      return user;
-    })
-    .catch((error) => {
-      return error;
-    });
+const loginWithGoogle = async () => {
+  try {
+    const userCredential = await signInWithPopup(auth, provider);
+    const user = userCredential.user;
+    return user;
+  } catch (error) {
+    throw error;
+  }
 };
 
-const loginEmailAndPassword = (email, password) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      return user;
-    })
-    .catch((error) => {
-      return error;
-    });
+const loginEmailAndPassword = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      "riskyexperimental@gmail.com",
+      "30second"
+    );
+    const user = userCredential.user;
+    return user;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const logout = () => {
@@ -33,7 +35,7 @@ const logout = () => {
       // Sign-out successful.
     })
     .catch((error) => {
-      return error;
+      throw error;
     });
 };
 

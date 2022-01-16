@@ -10,6 +10,7 @@ import GroupCreationPage from "./pages/GroupCreationPage";
 import LoginPage from "./pages/Login";
 import NotFound404 from "./pages/NotFound404";
 import PrivateWrapper from "./routing/PrivateWrapper";
+import GlobalNotification from "./components/GlobalNotification";
 import "./index.css";
 
 // recoil atom
@@ -51,17 +52,21 @@ const App = () => {
   }, [setAuthenticated]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      {/* private routes */}
-      <Route element={<PrivateWrapper />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="group" element={<GroupCreationPage />} />
-      </Route>
-      <Route path="login" element={<LoginPage />} />
-      <Route path="/404" element={<NotFound404 />} />
-      <Route path="*" element={<Navigate replace to="/404" />} />
-    </Routes>
+    <div>
+      <GlobalNotification />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        {/* private routes */}
+        <Route element={<PrivateWrapper />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="group" element={<GroupCreationPage />} />
+        </Route>
+        <Route path="login" element={<LoginPage />} />
+        <Route path="/404" element={<NotFound404 />} />
+        <Route path="*" element={<Navigate replace to="/404" />} />
+      </Routes>
+    </div>
   );
 };
 
