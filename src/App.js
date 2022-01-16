@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { Routes, Route, Navigate, Link } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
 
 // components
-import Dashboard from "./pages/Dashboard";
+import Layout from "./pages/Layout";
 import GroupCreationPage from "./pages/GroupCreationPage";
 import LoginPage from "./pages/Login";
 import NotFound404 from "./pages/NotFound404";
@@ -15,32 +15,34 @@ import "./index.css";
 
 // recoil atom
 import { isAuthenticated } from "./atom";
+import Dashboard from "./pages/Dashboard";
+import Group from "./pages/Group";
 
-const Home = () => {
-  return (
-    <div>
-      <h1>Home</h1>
-      <Link
-        className="bg-blue-400  px-1 py-1 text-sm shadow-sm font-medium tracking-wider text-gray-50 rounded hover:shadow m-1"
-        to="/login"
-      >
-        Login
-      </Link>
-      <Link
-        className="bg-blue-400  px-1 py-1 text-sm shadow-sm font-medium tracking-wider text-gray-50 rounded hover:shadow m-1"
-        to="/group"
-      >
-        Group Creation
-      </Link>
-      <Link
-        className="bg-blue-400  px-1 py-1 text-sm shadow-sm font-medium tracking-wider text-gray-50 rounded hover:shadow m-1"
-        to="/dashboard"
-      >
-        Dashboard
-      </Link>
-    </div>
-  );
-};
+// const Home = () => {
+//   return (
+//     <div>
+//       <h1>Home</h1>
+//       <Link
+//         className="bg-blue-400  px-1 py-1 text-sm shadow-sm font-medium tracking-wider text-gray-50 rounded hover:shadow m-1"
+//         to="/login"
+//       >
+//         Login
+//       </Link>
+//       <Link
+//         className="bg-blue-400  px-1 py-1 text-sm shadow-sm font-medium tracking-wider text-gray-50 rounded hover:shadow m-1"
+//         to="/group"
+//       >
+//         Group Creation
+//       </Link>
+//       <Link
+//         className="bg-blue-400  px-1 py-1 text-sm shadow-sm font-medium tracking-wider text-gray-50 rounded hover:shadow m-1"
+//         to="/dashboard"
+//       >
+//         Dashboard
+//       </Link>
+//     </div>
+//   );
+// };
 
 const App = () => {
   const [authenticated, setAuthenticated] = useRecoilState(isAuthenticated);
@@ -55,11 +57,13 @@ const App = () => {
     <div>
       <GlobalNotification />
       <Routes>
-        <Route path="/" element={<Home />} />
-        {/* private routes */}
+        {/* <Route path="/" element={<Home />} /> */}
         <Route element={<PrivateWrapper />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="group" element={<GroupCreationPage />} />
+          <Route path="/" element={<Layout />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="group" element={<Group />} />
+          </Route>
+          <Route path="/createGroup" element={<GroupCreationPage />} />
         </Route>
         <Route path="login" element={<LoginPage auth={authenticated} />} />
         <Route path="/404" element={<NotFound404 />} />

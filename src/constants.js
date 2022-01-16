@@ -1,6 +1,6 @@
 const itemList = [
   {
-    selected: true,
+    selected: false,
     icon: (
       <svg
         width="20"
@@ -13,6 +13,7 @@ const itemList = [
       </svg>
     ),
     name: "Dashboard",
+    link: "/dashboard",
   },
   {
     selected: false,
@@ -28,6 +29,7 @@ const itemList = [
       </svg>
     ),
     name: "Group",
+    link: "/group",
   },
 ];
 

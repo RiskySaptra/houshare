@@ -1,6 +1,5 @@
 import {
   loginWithGoogle,
-  logout,
   loginEmailAndPassword,
 } from "../handlers/authHandler";
 
@@ -49,8 +48,9 @@ const LoginPage = ({ auth }) => {
         <div className="flex gap-4 item-center">
           <button
             type="button"
-            className="py-2 px-4 flex justify-center items-center bg-blue-600 hover:shadow-xl active:bg-blue-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md active:shadow-xl rounded"
+            className="disabled:bg-slate-50 disabled:text-gray-700 disabled:shadow-none py-2 px-4 flex justify-center items-center bg-blue-600 hover:shadow-xl active:bg-blue-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md active:shadow-xl rounded"
             onClick={() => handleLoginWithEmail()}
+            disabled={true}
           >
             <svg
               width="20"
@@ -140,9 +140,9 @@ const LoginPage = ({ auth }) => {
                 type="submit"
                 className="py-2 px-4  bg-blue-500 active:bg-blue-600  text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md active:shadow-xl rounded"
                 // href="/group"
-                onClick={logout}
+                // onClick={logout}
               >
-                Logout
+                Login
               </button>
             </div>
           </form>
