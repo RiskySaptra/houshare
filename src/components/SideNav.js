@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 function SideNav({ menuList }) {
   let newItems = [...menuList];
@@ -37,9 +37,9 @@ function SideNav({ menuList }) {
   return (
     <div className="h-screen hidden lg:flex flex-col shadow-xl relative w-80">
       <div className="flex flex-col bg-white h-full rounded-2xl dark:bg-gray-700">
-        <div className="flex items-center justify-center pt-6">
+        <Link to="/" className="flex items-center justify-center pt-6">
           icon terserah
-        </div>
+        </Link>
         <nav className="mt-6 flex flex-col">
           {menuList.map((item, index) => (
             <button

@@ -35,7 +35,7 @@ const LoginPage = ({ auth }) => {
 
   useEffect(() => {
     if (auth && location.pathname === "/login") {
-      return navigate("/dashboard", { replace: true });
+      return navigate("/", { replace: true });
     }
   }, [auth, location.pathname, navigate]);
 
@@ -49,7 +49,6 @@ const LoginPage = ({ auth }) => {
           <button
             type="button"
             className="disabled:bg-slate-50 disabled:text-gray-700 disabled:shadow-none py-2 px-4 flex justify-center items-center bg-blue-600 hover:shadow-xl active:bg-blue-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md active:shadow-xl rounded"
-            onClick={() => handleLoginWithEmail()}
             disabled={true}
           >
             <svg
@@ -139,8 +138,7 @@ const LoginPage = ({ auth }) => {
               <button
                 type="submit"
                 className="py-2 px-4  bg-blue-500 active:bg-blue-600  text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md active:shadow-xl rounded"
-                // href="/group"
-                // onClick={logout}
+                onClick={() => handleLoginWithEmail()}
               >
                 Login
               </button>

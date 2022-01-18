@@ -1,8 +1,20 @@
 import { useRecoilState } from "recoil";
 import { isError } from "../atom";
 
+import { useEffect } from "react";
+
 const GlobalNotification = () => {
   const [error, setError] = useRecoilState(isError);
+
+  useEffect(() => {
+    if (error.status) {
+      const timer = setTimeout(() => {
+        setError({ status: false, message: "" });
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error, setError]);
+
   return (
     <div
       className={`fixed bottom-0 right-0 z-10 m-20 ${

@@ -6,6 +6,7 @@ import { auth } from "./firebase/config";
 
 // components
 import Layout from "./pages/Layout";
+import Home from "./pages/Home";
 import GroupCreationPage from "./pages/GroupCreationPage";
 import LoginPage from "./pages/Login";
 import NotFound404 from "./pages/NotFound404";
@@ -17,32 +18,6 @@ import "./index.css";
 import { isAuthenticated } from "./atom";
 import Dashboard from "./pages/Dashboard";
 import Group from "./pages/Group";
-
-// const Home = () => {
-//   return (
-//     <div>
-//       <h1>Home</h1>
-//       <Link
-//         className="bg-blue-400  px-1 py-1 text-sm shadow-sm font-medium tracking-wider text-gray-50 rounded hover:shadow m-1"
-//         to="/login"
-//       >
-//         Login
-//       </Link>
-//       <Link
-//         className="bg-blue-400  px-1 py-1 text-sm shadow-sm font-medium tracking-wider text-gray-50 rounded hover:shadow m-1"
-//         to="/group"
-//       >
-//         Group Creation
-//       </Link>
-//       <Link
-//         className="bg-blue-400  px-1 py-1 text-sm shadow-sm font-medium tracking-wider text-gray-50 rounded hover:shadow m-1"
-//         to="/dashboard"
-//       >
-//         Dashboard
-//       </Link>
-//     </div>
-//   );
-// };
 
 const App = () => {
   const [authenticated, setAuthenticated] = useRecoilState(isAuthenticated);
@@ -59,7 +34,8 @@ const App = () => {
       <Routes>
         {/* <Route path="/" element={<Home />} /> */}
         <Route element={<PrivateWrapper />}>
-          <Route path="/" element={<Layout />}>
+          <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="group" element={<Group />} />
           </Route>
