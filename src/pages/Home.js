@@ -13,7 +13,7 @@ const Home = () => {
       </Link>
       <Link
         className="bg-blue-400  px-1 py-1 text-sm shadow-sm font-medium tracking-wider text-gray-50 rounded hover:shadow m-1"
-        to="/createGroup"
+        to="/create-group"
       >
         Group Creation
       </Link>

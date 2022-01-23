@@ -32,14 +32,13 @@ const App = () => {
     <div>
       <GlobalNotification />
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
         <Route element={<PrivateWrapper />}>
           <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="group" element={<Group />} />
           </Route>
-          <Route path="/createGroup" element={<GroupCreationPage />} />
+          <Route path="/create-group" element={<GroupCreationPage />} />
         </Route>
         <Route path="login" element={<LoginPage auth={authenticated} />} />
         <Route path="/404" element={<NotFound404 />} />
